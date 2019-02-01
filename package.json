@@ -1,6 +1,6 @@
 {
-  "name": "enums",
-  "version": "1.0.0",
+  "name": "fun-enums",
+  "version": "1.0.1",
   "description": "Functional enum implementation",
   "main": "index.js",
   "scripts": {

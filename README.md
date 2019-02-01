@@ -2,10 +2,16 @@
 
 Functional enum implementation for JS based on [@rbuckton's enum proposal](https://github.com/rbuckton/proposal-enum).
 
+## Install
+
+```bash
+npm install --save fun-enums
+```
+
 ## Usage
 
 ```js
-const { enums } = require('enums');
+const { enums } = require('fun-enums');
 
 // Default initialization
 const weekdays = enums()(["monday", "tuesday", "wednesday", "thursday", "friday"]);
@@ -21,7 +27,7 @@ weekdays.friday; // 4
 Enums is built around "initializers" which allow you to change the behavior of how the enum is created. The default initalizer is `number` which sets the first enum value to 0 and increments each following by 1. Enums also exposes a `string` initializer which sets the value equal to the given enum name.
 
 ```js
-const { enums, string, number } = require('enums');
+const { enums, string, number } = require('fun-enums');
 // Provide other initializers from the package like string
 let colors = enums(string)(['red', 'green', 'blue'])
 colors.red; // 'red'
@@ -35,6 +41,8 @@ colors.red // 0
 You can also provide your own custom initializers by passing in an initialization function to enums.
 
 ```js
+const { enums } = require('fun-enums');
+
 function capitalize(en, _prevValue) {
   return en.charAt(0).toUpperCase() + en.slice(1);
 }
