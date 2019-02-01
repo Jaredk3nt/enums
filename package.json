@@ -1,0 +1,17 @@
+{
+  "name": "enums",
+  "version": "1.0.0",
+  "description": "Functional enum implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "enums"
+  ],
+  "author": "Jared K Jones",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.0.0"
+  }
+}
