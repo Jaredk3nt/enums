@@ -1,5 +1,7 @@
 # Enums
 
+[![Build Status](https://travis-ci.org/Jaredk3nt/enums.svg?branch=master)](https://travis-ci.org/Jaredk3nt/enums)
+
 Functional enum implementation for JS based on [@rbuckton's enum proposal](https://github.com/rbuckton/proposal-enum).
 
 ## Install
