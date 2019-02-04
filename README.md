@@ -50,7 +50,7 @@ function capitalize(en, _prevValue) {
 }
 
 const colors = enums(capitalize)(['red', 'green', 'blue']);
-colos.red; // 'Red'
+colors.red; // 'Red'
 ```
 
 Your initializer will be passed these arguments:
@@ -60,6 +60,28 @@ Your initializer will be passed these arguments:
 | enum | string | the string value passed to the enum to be used as the key |
 | prevValue | any | the value of the previous enum initialized. Used to increment enum values |
 
+## Override syntax
+
+In some cases you want a bit more control over the exact values on your enum. You can override the normal behavior of any given initializer by passing in an object rather than an array.
+
+```js
+const { enums } = require('fun-enums');
+
+const colors = enums()({ red: '#f44242', green: '#27c65a', blue: '#003bff' });
+colors.red; // '#f44242'
+```
+
+This allows you to give values when running a function may not be the best method for defining the enum. You can also "opt-in" to the initializer whenever you want even when overriding by giving a key `undefined`.
+
+```js
+const { enums, string } = require('fun-enums');
+
+const names = enums(string)({ john: 'johnny', sarah: undefined, tim: 'timothy' });
+names.sarah; // 'sarah'
+names.tim; // 'timothy'
+```
+
+> Objects and Arrays are invalid types for enum values and will be overwritten by default behavior when found.
 
 ## Enums API
 

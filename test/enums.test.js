@@ -1,6 +1,13 @@
 const { enums, string, number } = require("../src");
 
 const wd = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+const custom_wd = {
+  mon: 'Monday',
+  tue: 'Tuesday',
+  wed: 'Wednesday',
+  thur: 'Thursday',
+  fri: 'Friday'
+};
 
 describe("enum", () => {
   describe("core", () => {
@@ -34,6 +41,48 @@ describe("enum", () => {
       expect(weekDays.friday).toBe(wd[4]);
     });
   });
+
+  describe("override initializer", () => {
+    test("returns an object", () => {
+      let weekDays = enums()(custom_wd);
+      expect(typeof weekDays).toBe("object");
+    });
+
+    test("the values are assigned string values equal to keys", () => {
+      let weekDays = enums()(custom_wd);
+      expect(weekDays.mon).toBe(custom_wd.mon);
+      expect(weekDays.tue).toBe(custom_wd.tue);
+      expect(weekDays.wed).toBe(custom_wd.wed);
+      expect(weekDays.thur).toBe(custom_wd.thur);
+      expect(weekDays.fri).toBe(custom_wd.fri);
+    });
+
+    test("given undefined or invalid values on override it should initialize as normal: number", () => {
+      let en = enums()({
+        test: 'hello',
+        test2: ['hello'],
+        test3: 'hi',
+        test4: undefined
+      });
+      expect(en.test).toBe('hello');
+      expect(en.test2).toBe(0);
+      expect(en.test3).toBe('hi');
+      expect(en.test4).toBe(1);
+    });
+
+    test("given undefined or invalid values on override it should initialize as normal: string", () => {
+      let en = enums(string)({
+        test: 'hello',
+        test2: ['hello'],
+        test3: 'hi',
+        test4: undefined
+      });
+      expect(en.test).toBe('hello');
+      expect(en.test2).toBe('test2');
+      expect(en.test3).toBe('hi');
+      expect(en.test4).toBe('test4');
+    });
+  })
 
   describe("enum api", () => {
     describe("keys", () => {
