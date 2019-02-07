@@ -1,9 +1,11 @@
 {
   "name": "fun-enums",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "description": "Functional enum implementation",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "prepare": "npm run build",
+    "build": "babel src -d dist",
     "test": "jest"
   },
   "keywords": [
@@ -12,6 +14,9 @@
   "author": "Jared K Jones",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "jest": "^24.0.0"
   }
 }

@@ -6,6 +6,7 @@ cache:
   - node_modules
 script:
   - npm test
+  - npm build
 deploy:
   provider: npm
   email: jkjones.dev@gmail.com
