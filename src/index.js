@@ -17,34 +17,39 @@ function giveMethods(en) {
   en.getName = val => keys(en)[Object.values(en).indexOf(val)];
 }
 
-function generator(initializer, enums) {
-  let pv;
-  let en;
-  if (!enums) return undefined;
-  if (Array.isArray(enums)) {
-    en = enums.reduce((acc, val) => {
-      const v = initializer(val, pv);
-      pv = v; // Update previous value
-      return { ...acc, [val]: v };
-    }, {});
-  } else if (typeof enums === "object") {
-    en = Object.entries(enums).reduce((acc, val) => {
-      const key = val[0];
-      const value = val[1];
-      if (!value || Array.isArray(value) || typeof value === "object") {
-        const v = initializer(key, pv);
-        pv = v;
-        return { ...acc, [key]: v };
-      }
-      return { ...acc, [key]: value };
-    }, {});
-  }
-  giveMethods(en);
-  return Object.freeze(en);
-}
-
 function enums(initializer = number) {
-  return enums => generator(initializer, enums);
+  function generator(...args) {
+    if (!args || !args.length) return undefined;
+    const enums = args.length > 1 ? args : args[0];
+    let en = {};
+    let pv;
+
+    if (Array.isArray(enums)) {
+      for (let val of enums) {
+        const v = initializer(val, pv);
+        pv = v;
+        en[val] = v;
+      }
+    } else if (typeof enums === "object") {
+      for (let val of Object.entries(enums)) {
+        const key = val[0];
+        const value = val[1];
+        if (!value || Array.isArray(value) || typeof value === "object") {
+          const v = initializer(key, pv);
+          pv = v;
+          en[key] = Object.freeze(v);
+        } else {
+          en[key] = Object.freeze(value);
+        }
+      }
+    }
+
+    giveMethods(en);
+    
+    return Object.freeze(en);
+  }
+
+  return generator;
 }
 
 module.exports = {
