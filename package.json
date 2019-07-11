@@ -7,9 +7,6 @@
     "build": "babel src -d dist",
     "test": "jest"
   },
-  "keywords": [
-    "enums"
-  ],
   "author": "Jared K Jones",
   "license": "ISC",
   "devDependencies": {
@@ -17,5 +14,12 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "jest": "^24.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaredk3nt/enums.git"
+  },
+  "keywords": [
+    "enums"
+  ]
 }

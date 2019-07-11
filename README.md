@@ -16,13 +16,13 @@ npm install --save fun-enums
 const { enums } = require('fun-enums');
 
 // Default initialization
-const weekdays = enums()(["monday", "tuesday", "wednesday", "thursday", "friday"]);
+const weekdays = enums()("monday", "tuesday", "wednesday", "thursday", "friday");
 
 weekdays.monday; // 0
 weekdays.friday; // 4
 ```
 
-> Enums are frozen and should not be mutated after initializing
+> Enums are frozen and should not be mutated after initializing. To avoid allowing mutation custom enum values should not be objects of depths greater than 1.
 
 ## Initializers
 
@@ -31,10 +31,10 @@ weekdays.friday; // 4
 ```js
 const { enums, string, number } = require('fun-enums');
 // Provide other initializers from the package like string
-let colors = enums(string)(['red', 'green', 'blue'])
+let colors = enums(string)('red', 'green', 'blue')
 colors.red; // 'red'
 
-colors = enums(number)(['red', 'green', 'blue']); // number does not need to be specified as it is the default behavior
+colors = enums(number)('red', 'green', 'blue'); // number does not need to be specified as it is the default behavior
 colors.red // 0
 ```
 
@@ -49,7 +49,7 @@ function capitalize(en, _prevValue) {
   return en.charAt(0).toUpperCase() + en.slice(1);
 }
 
-const colors = enums(capitalize)(['red', 'green', 'blue']);
+const colors = enums(capitalize)('red', 'green', 'blue');
 colors.red; // 'Red'
 ```
 
@@ -92,7 +92,7 @@ names.tim; // 'timothy'
 ```js
 const { enums } = require('fun-enums');
 
-const colors = enums()(['red', 'green', 'blue']);
+const colors = enums()('red', 'green', 'blue');
 colors.keys(); // ['red', 'green', 'blue']
 ```
 
@@ -101,7 +101,7 @@ colors.keys(); // ['red', 'green', 'blue']
 ```js
 const { enums } = require('fun-enums');
 
-const colors = enums()(['red', 'green', 'blue']);
+const colors = enums()('red', 'green', 'blue');
 colors.values(); // [0, 1, 2]
 ```
 
@@ -110,8 +110,8 @@ colors.values(); // [0, 1, 2]
 ```js
 const { enums } = require('fun-enums');
 
-const colors = enums()(['red', 'green', 'blue']);
-colors.keys(); // [['red', 0], ['green', 1], ['blue', 2]]
+const colors = enums()('red', 'green', 'blue');
+colors.entries(); // [['red', 0], ['green', 1], ['blue', 2]]
 ```
 
 ### `.has()`
@@ -119,7 +119,7 @@ colors.keys(); // [['red', 0], ['green', 1], ['blue', 2]]
 ```js
 const { enums } = require('fun-enums');
 
-const colors = enums()(['red', 'green', 'blue']);
+const colors = enums()('red', 'green', 'blue');
 colors.has('red'); // true
 colors.has('purple'); // false
 ```
@@ -129,7 +129,7 @@ colors.has('purple'); // false
 ```js
 const { enums } = require('fun-enums');
 
-const colors = enums()(['red', 'green', 'blue']);
+const colors = enums()('red', 'green', 'blue');
 colors.hasValue(0); // true
 colors.hasValue('red'); // false
 ```
@@ -139,7 +139,7 @@ colors.hasValue('red'); // false
 ```js
 const { enums } = require('fun-enums');
 
-const colors = enums()(['red', 'green', 'blue']);
+const colors = enums()('red', 'green', 'blue');
 colors.getName(0); // 'red'
 colors.getName(99); // undefined
 ```
