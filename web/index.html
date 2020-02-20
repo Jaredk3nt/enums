@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>FunEnums</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/tomorrow-night-eighties.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+ </head>
+</head>
+<body>
+  <nav>
+    <div class='logo'>
+      <span class='logo__sub-text'>Fun</span><span class='logo__text'>Enums</span>
+    </div>
+    <div>
+      <a href='https://www.npmjs.com/package/fun-enums'>NPM</a>
+      <a href='https://github.com/Jaredk3nt/enums'>Github</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <img src='/media/images/banner.png' alt='enums' />
+      <div class='hero-text'>
+        <h1>Write JavaScript with Enums</h1>
+        <h2>Without any pain or setup</h2>
+      </div>
+    </section>
+    <section class="installation">
+      <h2 class='section-header'>Installation</h2>
+      <pre><code class="bash">npm i fun-enums</code></pre>
+    </section>
+    <section class="usage">
+      <h2 class='section-header'>Usage</h2>
+      <pre><code class="javascript">
+const { enums } = require('fun-enums');
+
+// Default initialization
+const weekdays = enums()("monday", "tuesday", "wednesday", "thursday", "friday");
+
+weekdays.monday; // 0
+weekdays.friday; // 4
+      </code></pre>
+    </section>
+    <section class="api">
+      <h2 class='section-header'>Enum API</h2>
+      <div class='api-navigator'>
+        <ul id='api-navigator__list'>
+          <li class='active'>Initializers</li>
+          <li>Overrides</li>
+          <li>keys</li>
+          <li>values</li>
+          <li>entries</li>
+          <li>has</li>
+          <li>hasValue</li>
+          <li>getName</li>
+        </ul>
+        <div id='api-navigator__window'>
+          <h3>Initializers</h3>
+          <p>
+            <code>fun-enums</code> is built around "initializers" which allow you to change the behavior of how the enum is created. The default initalizer is <code>number</code> which sets the first enum value to 0 and increments each following by 1. <code>fun-enums</code> also exposes a <code>string</code> initializer which sets the value equal to the given enum name.
+          </p>
+          <pre>
+            <code>
+const { enums, string, number } = require('fun-enums');
+// Provide other initializers from the package like string
+let colors = enums(string)('red', 'green', 'blue')
+colors.red; // 'red'
+
+colors = enums(number)('red', 'green', 'blue'); // number does not need to be specified as it is the default behavior
+colors.red // 0
+            </code>
+          </pre>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+</html>

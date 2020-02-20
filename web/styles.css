@@ -1,0 +1,163 @@
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('media/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('media/fonts/JetBrainsMono-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('media/fonts/JetBrainsMono-ExtraBold.woff2') format('woff2');
+}
+
+:root {
+  --bg: #000000;
+  --fg: #ffffff;
+  --width: 1200px;
+}
+
+* {
+  font-family: JetBrainsMono, monospace;
+  color: var(--fg);
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+}
+
+nav {
+  display: flex;
+  width: var(--width);
+  max-width: var(--width);
+  margin: 0 auto;
+  height: calc(30px + 2em);
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+nav a {
+  padding: 0em 1em;
+}
+
+.logo {
+  height: 100%;
+}
+
+.logo__sub-text {
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.logo__text {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+main {
+  width: var(--width);
+  max-width: var(--width);
+  margin: 0 auto;
+}
+
+section {
+  margin-bottom: 2em;
+}
+
+.section-header {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 310px;
+  margin: 2em 0em 4em 0em;
+}
+
+.hero img {
+  position: absolute;
+  max-width: 900px;
+  z-index: -1;
+  opacity:50%;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.hero-text h1 {
+  margin: 0px;
+  font-size: 3.5rem;
+  margin-left: 1em;
+  text-shadow: 0px 0px 15px rgba(0,0,0,.85);
+}
+
+.hero-text h2 {
+  margin: 0px;
+  font-weight: 600;
+  text-shadow: 0px 0px 15px rgba(0,0,0,.85);
+}
+
+pre code.hljs {
+  padding: .5em 1em;
+}
+
+.api-navigator {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+
+#api-navigator__list {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  padding-right: 2em;
+}
+
+#api-navigator__list li {
+  padding: .25em 0em;
+  margin: .25em 0em;
+}
+
+#api-navigator__list li:hover {
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.2);
+}
+
+#api-navigator__list li.active {
+  background-color: var(--fg);
+  color: var(--bg);
+}
+
+#api-navigator__window {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+#api-navigator__window h3 {
+  margin-top: 0px;
+}
