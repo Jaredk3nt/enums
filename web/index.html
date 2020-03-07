@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>FunEnums</title>
-  <link rel="stylesheet" type="text/css" href="styles.css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/tomorrow-night-eighties.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
- </head>
-</head>
-<body>
-  <nav>
-    <div class='logo'>
-      <span class='logo__sub-text'>Fun</span><span class='logo__text'>Enums</span>
-    </div>
-    <div>
-      <a href='https://www.npmjs.com/package/fun-enums'>NPM</a>
-      <a href='https://github.com/Jaredk3nt/enums'>Github</a>
-    </div>
-  </nav>
-  <main>
-    <section class="hero">
-      <img src='/media/images/banner.png' alt='enums' />
-      <div class='hero-text'>
-        <h1>Write JavaScript with Enums</h1>
-        <h2>Without any pain or setup</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>FunEnums</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/tomorrow-night-eighties.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <span class="logo__sub-text">Fun</span
+        ><span class="logo__text">Enums</span>
       </div>
-    </section>
-    <section class="installation">
-      <h2 class='section-header'>Installation</h2>
-      <pre><code class="bash">npm i fun-enums</code></pre>
-    </section>
-    <section class="usage">
-      <h2 class='section-header'>Usage</h2>
-      <pre><code class="javascript">
+      <div>
+        <a href="https://www.npmjs.com/package/fun-enums">NPM</a>
+        <a href="https://github.com/Jaredk3nt/enums">Github</a>
+      </div>
+    </nav>
+    <main>
+      <section class="hero">
+        <img src="/media/images/banner.png" alt="enums" />
+        <div class="hero-text">
+          <h1>Write JavaScript with Enums</h1>
+          <h2>Without any pain or setup</h2>
+        </div>
+      </section>
+      <section class="installation">
+        <h2 class="section-header">Installation</h2>
+        <pre><code class="bash">npm i fun-enums</code></pre>
+      </section>
+      <section class="usage">
+        <h2 class="section-header">Usage</h2>
+        <pre><code class="javascript">
 const { enums } = require('fun-enums');
 
 // Default initialization
@@ -43,27 +46,27 @@ const weekdays = enums()("monday", "tuesday", "wednesday", "thursday", "friday")
 weekdays.monday; // 0
 weekdays.friday; // 4
       </code></pre>
-    </section>
-    <section class="api">
-      <h2 class='section-header'>Enum API</h2>
-      <div class='api-navigator'>
-        <ul id='api-navigator__list'>
-          <li class='active'>Initializers</li>
-          <li>Overrides</li>
-          <li>keys</li>
-          <li>values</li>
-          <li>entries</li>
-          <li>has</li>
-          <li>hasValue</li>
-          <li>getName</li>
-        </ul>
-        <div id='api-navigator__window'>
-          <h3>Initializers</h3>
-          <p>
-            <code>fun-enums</code> is built around "initializers" which allow you to change the behavior of how the enum is created. The default initalizer is <code>number</code> which sets the first enum value to 0 and increments each following by 1. <code>fun-enums</code> also exposes a <code>string</code> initializer which sets the value equal to the given enum name.
-          </p>
-          <pre>
-            <code>
+      </section>
+      <section class="api">
+        <h2 class="section-header">Enum API</h2>
+        <div class="api-navigator">
+          <ul id="api-navigator__list"></ul>
+          <div id="api-navigator__window">
+            <!-- TODO: Separate out these views to not cluter up this file -->
+            <!-- INITIALIZERS VIEW -->
+            <div id="initializers">
+              <h3>Initializers</h3>
+              <p>
+                <code>fun-enums</code> is built around "initializers" which
+                allow you to change the behavior of how the enum is created. The
+                default initalizer is <code>number</code> which sets the first
+                enum value to 0 and increments each following by 1.
+                <code>fun-enums</code> also exposes a
+                <code>string</code> initializer which sets the value equal to
+                the given enum name.
+              </p>
+              <pre>
+                <code>
 const { enums, string, number } = require('fun-enums');
 // Provide other initializers from the package like string
 let colors = enums(string)('red', 'green', 'blue')
@@ -71,14 +74,230 @@ colors.red; // 'red'
 
 colors = enums(number)('red', 'green', 'blue'); // number does not need to be specified as it is the default behavior
 colors.red // 0
-            </code>
-          </pre>
+                </code>
+              </pre>
+              <p>
+                You can also provide your own custom initializers by passing in
+                an initialization function to enums.
+              </p>
+              <pre>
+                <code>
+const { enums } = require('fun-enums');
+
+function capitalize(en, _prevValue) {
+  return en.charAt(0).toUpperCase() + en.slice(1);
+}
+
+const colors = enums(capitalize)('red', 'green', 'blue');
+colors.red; // 'Red'
+                </code>
+              </pre>
+              <p>
+                Your initializer will be passed these arguments:
+              </p>
+              <!-- TODO: style table -->
+              <table>
+                <thead>
+                  <tr>
+                    <th>arg</th>
+                    <th>type</th>
+                    <th>description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>enum</td>
+                    <td>string</td>
+                    <td>
+                      the string value passed to the enum to be used as the key
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>prevValue</td>
+                    <td>any</td>
+                    <td>
+                      the value of the previous enum initialized. Used to
+                      increment enum values
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- OVERRIDES VIEW -->
+            <div id="overrides">
+              <h3>Overrides</h3>
+              <p>
+                In some cases you want a bit more control over the exact values
+                on your enum. You can override the normal behavior of any given
+                initializer by passing in an object rather than an array.
+              </p>
+              <pre>
+                <code class="javascript">
+const { enums } = require('fun-enums');
+
+const colors = enums()({ red: '#f44242', green: '#27c65a', blue: '#003bff' });
+colors.red; // '#f44242'
+                </code>
+              </pre>
+              <p>
+                This allows you to give values when running a function may not
+                be the best method for defining the enum. You can also "opt-in"
+                to the initializer whenever you want even when overriding by
+                giving a key undefined.
+              </p>
+              <pre>
+                <code>
+const { enums, string } = require('fun-enums');
+
+const names = enums(string)({ john: 'johnny', sarah: undefined, tim: 'timothy' });
+names.sarah; // 'sarah'
+names.tim; // 'timothy'
+                </code>
+              </pre>
+            </div>
+            <!-- KEYS VIEW -->
+            <div id="keys">
+              <h3>Keys</h3>
+              <h4><code>.keys()</code></h4>
+
+              <p>Return a new array with the keys from the enum.</p>
+              <pre>
+                <code class="javascript">
+const { enums } = require('fun-enums');
+
+const colors = enums()('red', 'green', 'blue');
+colors.keys(); // ['red', 'green', 'blue']
+                </code>
+              </pre>
+            </div>
+            <!-- VALUES VIEW -->
+            <div id="values">
+              <h3>Values</h3>
+              <h4><code>.values()</code></h4>
+              <p>Return a new array with the values from the enum.</p>
+              <pre>
+                <code>
+const { enums } = require('fun-enums');
+
+const colors = enums()('red', 'green', 'blue');
+colors.values(); // [0, 1, 2]
+                </code>
+              </pre>
+            </div>
+            <!-- ENTRIES VIEW -->
+            <div id="entries">
+              <h3>Entries</h3>
+              <h4><code>.entries()</code></h4>
+              <p>
+                Return a new array with tuple arrays with the key and value from
+                items in the enum.
+              </p>
+              <pre>
+                <code class="javascript">
+const { enums } = require('fun-enums');
+
+const colors = enums()('red', 'green', 'blue');
+colors.entries(); // [['red', 0], ['green', 1], ['blue', 2]]
+                </code>
+              </pre>
+            </div>
+            <!-- HAS VIEW -->
+            <div id="has">
+              <h3>Has</h3>
+              <h4><code>.has()</code></h4>
+              <p>Returns a boolean if the enum contains the given key.</p>
+              <pre>
+                <code class="javascript">
+const { enums } = require('fun-enums');
+
+const colors = enums()('red', 'green', 'blue');
+colors.has('red'); // true
+colors.has('purple'); // false
+                </code>
+              </pre>
+            </div>
+            <!-- HASVALUE VIEW -->
+            <div id="hasvalue">
+              <h3>Has Value</h3>
+              <h4><code>.hasValue()</code></h4>
+              <p>Returns a boolean if the enum contains the given value.</p>
+              <pre>
+                <code class="javascript">
+const { enums } = require('fun-enums');
+
+const colors = enums()('red', 'green', 'blue');
+colors.hasValue(0); // true
+colors.hasValue('red'); // false
+                </code>
+              </pre>
+            </div>
+            <!-- GETNAME VIEW -->
+            <div id="getname">
+              <h3>Get Name</h3>
+              <h4><code>.getName()</code></h4>
+              <p>Return the string value of the key for a given value.</p>
+              <pre>
+                <code class="javascript">
+const { enums } = require('fun-enums');
+
+const colors = enums()('red', 'green', 'blue');
+colors.getName(0); // 'red'
+colors.getName(99); // undefined
+                </code>
+              </pre>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
-</body>
-<script>
-  hljs.initHighlightingOnLoad();
-</script>
+      </section>
+      <footer></footer>
+    </main>
+  </body>
+  <script>
+    hljs.initHighlightingOnLoad();
+
+    const apiTabs = [
+      { id: 'initializers', name: 'Initializers' },
+      { id: 'overrides', name: 'Overrides' },
+      { id: 'keys', name: 'Keys' },
+      { id: 'values', name: 'Values' },
+      { id: 'entries', name: 'Entries' },
+      { id: 'has', name: 'Has Key' },
+      { id: 'hasvalue', name: 'Has Value' },
+      { id: 'getname', name: 'Get Name' },
+    ];
+
+    const ACTIVE_CLASS = 'active';
+    let activeApiTab = 0;
+    // Do first load setup
+    setUpApiNav();
+
+    function setUpApiNav() {
+      const nav = document.getElementById('api-navigator__list');
+      for (let index = 0; index < apiTabs.length; index++) {
+        let tab = apiTabs[index];
+        // Create list element with all required info
+        const tabEl = document.createElement('li');
+        tabEl.innerText = tab.name;
+        tabEl.onclick = () => activateTab(index);
+        // push to DOM
+        nav.appendChild(tabEl);
+      }
+      // Set the first list element to active
+      activateTab(0);
+    }
+
+    function activateTab(newActiveTab) {
+      const tabEls = document.getElementById('api-navigator__list').childNodes;
+      // Deactivate old tab
+      tabEls[activeApiTab].classList.remove(ACTIVE_CLASS);
+      const oldTabView = document.getElementById(apiTabs[activeApiTab].id);
+      if (oldTabView) oldTabView.classList.remove(ACTIVE_CLASS);
+      // Activate new tab
+      tabEls[newActiveTab].classList.add(ACTIVE_CLASS);
+      const newTabView = document.getElementById(apiTabs[newActiveTab].id);
+      if (newTabView) newTabView.classList.add(ACTIVE_CLASS);
+      // Update tracker
+      activeApiTab = newActiveTab;
+    }
+  </script>
 </html>

@@ -161,3 +161,45 @@ pre code.hljs {
 #api-navigator__window h3 {
   margin-top: 0px;
 }
+
+#api-navigator__window > div {
+  display: none;
+}
+
+#api-navigator__window > .active {
+  display: block;
+}
+
+#api-navigator__window .code-title {
+  display: flex;
+  align-items: center;
+}
+
+#api-navigator__window .code-title h3 {
+  margin: 0;
+}
+
+#api-navigator__window h4 code {
+  background-color: #2d2d2d;
+  color: var(--fg);
+  padding: .5em;
+  display: block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--fg);
+}
+
+td, th {
+  border-collapse: collapse;
+  border: 1px solid var(--fg);
+  padding: .5em .25em .5em .5em;
+  text-align: left;
+}
+
+footer {
+  width: 100%;
+  height: 25vh;
+}
