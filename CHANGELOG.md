@@ -2,6 +2,11 @@
 
 All notable changes to "fun-enums" will be documented in this file.
 
+## 1.2.1
+
+- Adding documentation website
+- Fixing some package vulnerabilities in dev-deps
+
 ## 1.2.0
 
 - Updating API to make default use parameter based rather than array based
