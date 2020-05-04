@@ -21,6 +21,12 @@ describe("enum", () => {
       expect(typeof weekDays).toBe("object");
     });
 
+    test("returns an object when a single non-array argument is passed in", () => {
+      let weekDays = enums()(wd[0]);
+      expect(typeof weekDays).toBe("object");
+      expect(weekDays).toHaveProperty(wd[0]);
+    })
+
     test("the values are assigned numbers starting at 0", () => {
       let weekDays = enums()(wd[0], wd[1], wd[2], wd[3], wd[4]);
       expect(weekDays.monday).toBe(0);

@@ -2,6 +2,10 @@
 
 All notable changes to "fun-enums" will be documented in this file.
 
+## 1.2.2
+
+- Fixing bug that caused single item enums to not be properly defined
+
 ## 1.2.1
 
 - Adding documentation website
