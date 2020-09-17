@@ -1,21 +1,4 @@
 const { number, string } = require("./initializers");
-const methods = ["keys", "values", "entries", "has", "hasValue", "getName"];
-
-function keys(en) {
-  return Object.keys(en).filter((k) => !methods.includes(k));
-}
-
-function giveMethods(en) {
-  en.keys = () => keys(en);
-  en.values = () => keys(en).map((k) => en[k]);
-  en.entries = () => keys(en).map((k) => [k, en[k]]);
-  en.has = (key) => {
-    if (methods.includes(key)) return false;
-    return en[key] !== undefined && en[key] !== null;
-  };
-  en.hasValue = (val) => Object.values(en).includes(val);
-  en.getName = (val) => keys(en)[Object.values(en).indexOf(val)];
-}
 
 function isObject(val) {
   if (val === null) return false;
@@ -29,34 +12,60 @@ function enums(initializer = number) {
       args.length === 1 && (Array.isArray(args[0]) || isObject(args[0]))
         ? args[0]
         : args;
-    let en = {};
-    let pv;
-
-    if (Array.isArray(enums)) {
-      for (let val of enums) {
-        const v = initializer(val, pv);
-        pv = v;
-        en[val] = v;
-      }
-    } else if (isObject(enums)) {
-      for (let [key, value] of Object.entries(enums)) {
-        if (!value || Array.isArray(value) || isObject(value)) {
-          const v = initializer(key, pv);
-          pv = v;
-          en[key] = Object.freeze(v);
-        } else {
-          en[key] = Object.freeze(value);
-        }
-      }
-    }
-
-    giveMethods(en);
-
-    return Object.freeze(en);
+    const en = new Enum(enums, initializer);
+    return en;
   }
 
   return generator;
 }
+
+function Enum(enums, initializer) {
+  let pv;
+  if (Array.isArray(enums)) {
+    for (let val of enums) {
+      const v = initializer(val, pv);
+      pv = v;
+      this[val] = v;
+    }
+  } else if (isObject(enums)) {
+    for (let [key, value] of Object.entries(enums)) {
+      if (!value || Array.isArray(value) || isObject(value)) {
+        const v = initializer(key, pv);
+        pv = v;
+        this[key] = Object.freeze(v);
+      } else {
+        this[key] = Object.freeze(value);
+      }
+    }
+  }
+  Object.freeze(this);
+}
+
+Enum.prototype.keys = function () {
+  return Object.keys(this);
+};
+
+Enum.prototype.values = function () {
+  return Object.values(this);
+};
+
+Enum.prototype.entries = function () {
+  return Object.entries(this);
+};
+
+Enum.prototype.has = function (key) {
+  return this[key] !== undefined && this[key] !== null;
+};
+
+Enum.prototype.hasValue = function (val) {
+  return Object.values(this).includes(val);
+};
+
+Enum.prototype.getName = function (val) {
+  const entries = Object.entries(this);
+  const entry = entries.find(([_key, value]) => value === val);
+  if (entry) return entry[0];
+};
 
 module.exports = {
   enums,
